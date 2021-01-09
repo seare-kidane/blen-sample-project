@@ -1,0 +1,19 @@
+{
+  "name": "blen-sample-project",
+  "version": "1.0.0",
+  "description": "Blen Sample Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seare-kidane/blen-sample-project.git"
+  },
+  "author": "Seare Kidane",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seare-kidane/blen-sample-project/issues"
+  },
+  "homepage": "https://github.com/seare-kidane/blen-sample-project#readme"
+}
