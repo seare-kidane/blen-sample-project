@@ -1,0 +1,27 @@
+{
+  "name": "blen-sample-project-backend",
+  "version": "1.0.0",
+  "description": "Blen Sample Project Backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seare-kidane/blen-sample-project.git"
+  },
+  "author": "Seare Kidane",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seare-kidane/blen-sample-project/issues"
+  },
+  "homepage": "https://github.com/seare-kidane/blen-sample-project#readme",
+  "dependencies": {
+    "apollo-server-express": "^1.4.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "graphql": "^15.4.0",
+    "graphql-tools": "^7.0.2",
+    "lodash": "^4.17.20"
+  }
+}

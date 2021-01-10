@@ -4,8 +4,8 @@
         "id": "59761c23b30d971669fb42ff",
         "age": 36,
         "name": "Dunlap Hubbard",
-        "gender": "male",
         "additionalInfo": {
+          "gender": "male",
           "company": "CEDWARD",
           "email": "dunlaphubbard@cedward.com",
           "phone": "+1 (890) 543-2508",
