@@ -1,7 +1,6 @@
-const { ApolloServer, gql } = require('apollo-server');
-// const cors = require('cors');
-const path = require('path');
-const fs = require('fs');
+import { ApolloServer, gql, IResolverObject } from 'apollo-server';
+import path from 'path';
+import fs from 'fs';
 
 // Reading the entire content of the file because it's small
 const fileContent = fs.readFileSync(path.join(__dirname, `../sampleData.json`), 'utf8');
@@ -31,9 +30,9 @@ const typeDefs = gql`
 // The resolvers
 const resolvers = {
   Query: {
-    clients: () => clients,
-    client: (_, { id }) => {
-      const client = clients.find(client => client.id === id);
+    clients: (): Array<object> => clients,
+    client: (_: void, { id }: { id: string; }): object => {
+      const client = clients.find((client: { id: string; }) => client.id === id);
       if (!client) {
         throw new Error(`Couldn't find client with id ${id}`);
       }
