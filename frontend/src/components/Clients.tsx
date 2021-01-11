@@ -14,7 +14,7 @@ export interface IClient {
   name: string;
 }
 
-interface IQueryData {
+interface IClientData {
   clients: IClient[]
 }
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Client_List = gql`
+const GET_CLIENTS = gql`
   query {
     clients {
       id,
@@ -36,7 +36,7 @@ const Client_List = gql`
 
 function Clients() {
   const classes = useStyles();
-  const { loading, error, data } = useQuery<IQueryData>(Client_List);
+  const { loading, error, data } = useQuery<IClientData>(GET_CLIENTS);
   
   return (
     <Grid container spacing={2}>

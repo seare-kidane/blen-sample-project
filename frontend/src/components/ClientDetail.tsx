@@ -15,8 +15,8 @@ interface IClientDetail extends IClient {
   }
 }
 
-interface IQueryData {
-  fullInfo: IClientDetail
+interface IClientDetailData {
+  client: IClientDetail
 }
 
 interface IClientDetailParam {
@@ -32,12 +32,9 @@ const useStyles = makeStyles({
   }
 });
 
-function ClientDetail() {
-  const classes = useStyles();
-  const { id } = useParams<IClientDetailParam>();
-  const Client_List = gql`
-  query {
-    fullInfo(id: "${id}") {
+const GET_CLIENT = gql`
+  query getClient($id: ID!) {
+    client(id: $id) {
       id,
       name,
       age,
@@ -50,7 +47,11 @@ function ClientDetail() {
       }
     }
   }`;
-  const { loading, error, data } = useQuery<IQueryData>(Client_List);
+
+function ClientDetail() {
+  const classes = useStyles();
+  const { id } = useParams<IClientDetailParam>();
+  const { loading, error, data } = useQuery<IClientDetailData>(GET_CLIENT, { variables: { id }});
   
   return (
     <Grid container spacing={2}>
@@ -73,35 +74,35 @@ function ClientDetail() {
               <TableBody>
                 <TableRow>
                   <TableCell className={classes.label}>ID</TableCell>
-                  <TableCell>{data.fullInfo.id}</TableCell>
+                  <TableCell>{data.client.id}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.label}>Name</TableCell>
-                  <TableCell>{data.fullInfo.name}</TableCell>
+                  <TableCell>{data.client.name}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.label}>Age</TableCell>
-                  <TableCell>{data.fullInfo.age}</TableCell>
+                  <TableCell>{data.client.age}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.label}>Gender</TableCell>
-                  <TableCell>{data.fullInfo.additionalInfo.gender}</TableCell>
+                  <TableCell>{data.client.additionalInfo.gender}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.label}>Company</TableCell>
-                  <TableCell>{data.fullInfo.additionalInfo.company}</TableCell>
+                  <TableCell>{data.client.additionalInfo.company}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.label}>Email</TableCell>
-                  <TableCell>{data.fullInfo.additionalInfo.email}</TableCell>
+                  <TableCell>{data.client.additionalInfo.email}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.label}>Phone</TableCell>
-                  <TableCell>{data.fullInfo.additionalInfo.phone}</TableCell>
+                  <TableCell>{data.client.additionalInfo.phone}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell className={classes.label}>Address</TableCell>
-                  <TableCell>{data.fullInfo.additionalInfo.address}</TableCell>
+                  <TableCell>{data.client.additionalInfo.address}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
