@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Container, CssBaseline, Grid } from '@material-ui/core';
+import { Container, CssBaseline, Grid, Typography } from '@material-ui/core';
 import { ApolloProvider, ApolloClient, InMemoryCache  } from '@apollo/client';
 import Clients from "./components/Clients";
 import ClientDetail from "./components/ClientDetail";
@@ -14,7 +14,12 @@ function App() {
   return (
     <Router>
       <CssBaseline />
-      <Grid container direction="row" justify="center" alignItems="center" style={{ height: '100vh' }}>
+      <Grid container direction="column" justify="flex-start" alignItems="center" style={{ height: '100vh' }}>
+        <Grid item>
+          <Typography variant="h3">
+            Blen Sample Project
+          </Typography>
+        </Grid>
         <Grid item>
           <Container maxWidth="md">
             <ApolloProvider client={client}>
