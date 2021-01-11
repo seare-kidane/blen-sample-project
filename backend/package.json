@@ -2,9 +2,9 @@
   "name": "blen-sample-project-backend",
   "version": "1.0.0",
   "description": "Blen Sample Project Backend",
-  "main": "server.js",
+  "main": "./src/server.ts",
   "scripts": {
-    "start": "node server.js"
+    "start": "node ./src/server.ts"
   },
   "repository": {
     "type": "git",

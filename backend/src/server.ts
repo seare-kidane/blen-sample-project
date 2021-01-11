@@ -8,7 +8,7 @@ const fs = require('fs');
 const { find } = require('lodash');
 
 // Reading the entire content of the file because it's small
-const fileContent = fs.readFileSync(path.join(__dirname, `sampleData.json`), 'utf8');
+const fileContent = fs.readFileSync(path.join(__dirname, `../sampleData.json`), 'utf8');
 const { clients } = JSON.parse(fileContent);
 
 // The GraphQL schema in string form
