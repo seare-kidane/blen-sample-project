@@ -19,7 +19,7 @@ interface IClientDetailData {
   client: IClientDetail
 }
 
-interface IClientDetailParam {
+interface IClientDetailVars {
   id: string;
 }
 
@@ -50,8 +50,8 @@ const GET_CLIENT = gql`
 
 function ClientDetail() {
   const classes = useStyles();
-  const { id } = useParams<IClientDetailParam>();
-  const { loading, error, data } = useQuery<IClientDetailData>(GET_CLIENT, { variables: { id }});
+  const { id } = useParams<IClientDetailVars>();
+  const { loading, error, data } = useQuery<IClientDetailData, IClientDetailVars>(GET_CLIENT, { variables: { id }});
   
   return (
     <Grid container spacing={2}>
