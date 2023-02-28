@@ -1,7 +1,6 @@
-import React from 'react';
 import { Link as RouterLink, useParams } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress, Grid, Link, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@material-ui/core';
+import { CircularProgress, Grid, Link, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material';
+import type { SxProps, Theme } from '@mui/material';
 import { useQuery, gql } from "@apollo/client";
 import { IClient } from './Clients';
 
@@ -23,14 +22,17 @@ interface IClientDetailVars {
   id: string;
 }
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-  label: {
-    fontWeight: 'bold'
-  }
-});
+type ClientDetailRouteParam = {
+  id: string;
+}
+
+const tableStyle: SxProps<Theme> = {
+  minWidth: 650
+};
+
+const labelStyle: SxProps<Theme> = {
+  fontWeight: 'bold'
+};
 
 const GET_CLIENT = gql`
   query getClient($id: ID!) {
@@ -49,9 +51,8 @@ const GET_CLIENT = gql`
   }`;
 
 function ClientDetail() {
-  const classes = useStyles();
-  const { id } = useParams<IClientDetailVars>();
-  const { loading, error, data } = useQuery<IClientDetailData, IClientDetailVars>(GET_CLIENT, { variables: { id }});
+  const { id } = useParams<ClientDetailRouteParam>();
+  const { loading, error, data } = useQuery<IClientDetailData, IClientDetailVars>(GET_CLIENT, { variables: { id: id! }});
   
   return (
     <Grid container spacing={2}>
@@ -70,38 +71,38 @@ function ClientDetail() {
         )}
         {!loading && !error && data && (
           <TableContainer component={Paper}>
-            <Table className={classes.table}>
+            <Table sx={tableStyle}>
               <TableBody>
                 <TableRow>
-                  <TableCell className={classes.label}>ID</TableCell>
+                  <TableCell sx={labelStyle}>ID</TableCell>
                   <TableCell>{data.client.id}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className={classes.label}>Name</TableCell>
+                  <TableCell sx={labelStyle}>Name</TableCell>
                   <TableCell>{data.client.name}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className={classes.label}>Age</TableCell>
+                  <TableCell sx={labelStyle}>Age</TableCell>
                   <TableCell>{data.client.age}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className={classes.label}>Gender</TableCell>
+                  <TableCell sx={labelStyle}>Gender</TableCell>
                   <TableCell>{data.client.additionalInfo.gender}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className={classes.label}>Company</TableCell>
+                  <TableCell sx={labelStyle}>Company</TableCell>
                   <TableCell>{data.client.additionalInfo.company}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className={classes.label}>Email</TableCell>
+                  <TableCell sx={labelStyle}>Email</TableCell>
                   <TableCell>{data.client.additionalInfo.email}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className={classes.label}>Phone</TableCell>
+                  <TableCell sx={labelStyle}>Phone</TableCell>
                   <TableCell>{data.client.additionalInfo.phone}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className={classes.label}>Address</TableCell>
+                  <TableCell sx={labelStyle}>Address</TableCell>
                   <TableCell>{data.client.additionalInfo.address}</TableCell>
                 </TableRow>
               </TableBody>

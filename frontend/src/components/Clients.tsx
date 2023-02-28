@@ -1,11 +1,9 @@
-import React from 'react';
 import { Link as RouterLink } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
 import {
   CircularProgress,
   Grid,
   Link, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography
-} from '@material-ui/core';
+} from '@mui/material';
 import { useQuery, gql } from "@apollo/client";
 
 export interface IClient {
@@ -18,11 +16,9 @@ interface IClientData {
   clients: IClient[]
 }
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  }
-});
+const tableStyle = {
+  minWidth: 650
+} as const;
 
 const GET_CLIENTS = gql`
   query {
@@ -35,7 +31,6 @@ const GET_CLIENTS = gql`
 `;
 
 function Clients() {
-  const classes = useStyles();
   const { loading, error, data } = useQuery<IClientData>(GET_CLIENTS);
   
   return (
@@ -52,7 +47,7 @@ function Clients() {
         )}
         {!loading && !error && data && (
           <TableContainer component={Paper}>
-            <Table className={classes.table}>
+            <Table sx={tableStyle}>
               <TableHead>
                 <TableRow>
                   <TableCell>ID</TableCell>
