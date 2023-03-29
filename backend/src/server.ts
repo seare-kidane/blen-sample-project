@@ -1,4 +1,4 @@
-import { ApolloServer, gql, IResolverObject } from 'apollo-server';
+import { ApolloServer, gql } from 'apollo-server';
 import path from 'path';
 import fs from 'fs';
 
@@ -9,30 +9,45 @@ const { clients } = JSON.parse(fileContent);
 // The GraphQL schema in string form
 const typeDefs = gql`
   type Client {
-    id: ID,
-    age: Int,
-    name: String,
+    id: ID
+    age: Int
+    name: String
     additionalInfo: AdditionalInfo
   }
   type AdditionalInfo {
-    gender: String,
-    company: String,
-    email: String,
-    phone: String,
+    gender: String
+    company: String
+    email: String
+    phone: String
     address: String
   }
   type Query {
-    clients: [Client],
+    clients: [Client]
     client(id: ID!): Client
   }
 `;
+interface IClient {
+  id: string;
+  age: number;
+  name: string;
+  additionalInfo: {
+    gender: String;
+    company: String;
+    email: String;
+    phone: String;
+    address: String;
+  };
+}
+interface IClientInput {
+  id: string;
+}
 
 // The resolvers
 const resolvers = {
   Query: {
-    clients: (): Array<object> => clients,
-    client: (_: void, { id }: { id: string; }): object => {
-      const client = clients.find((client: { id: string; }) => client.id === id);
+    clients: (): IClient[] => clients,
+    client: (_: void, { id }: IClientInput): IClient => {
+      const client = clients.find((client: IClient) => client.id === id);
       if (!client) {
         throw new Error(`Couldn't find client with id ${id}`);
       }
